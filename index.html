@@ -174,7 +174,53 @@
             box.querySelectorAll('input').forEach(inp=>inp.addEventListener('change',()=>{ const s=inp.dataset.s,i=+inp.dataset.i; thresholds[s][i].min=+inp.value; thresholds[s].sort((a,b)=>b.min-a.min); saveThresholds(); renderThresholdEditor(); calculate(); }));
         }
         function resetThresholds(){ thresholds=JSON.parse(JSON.stringify(defaultThresholds)); saveThresholds(); renderThresholdEditor(); calculate(); }
+ // 教師設定密碼：預設密碼為 114teacher，可自行修改
+        const TEACHER_PASSWORD = '114teacher';
 
+        function openTeacherSettings() {
+            document.getElementById('password-modal').classList.add('show');
+            const input = document.getElementById('teacher-password');
+            input.value = '';
+            document.getElementById('password-error').textContent = '';
+            setTimeout(() => input.focus(), 50);
+        }
+
+        function closePasswordModal() {
+            document.getElementById('password-modal').classList.remove('show');
+        }
+
+        function verifyTeacherPassword() {
+            const input = document.getElementById('teacher-password');
+            const error = document.getElementById('password-error');
+            if (input.value === TEACHER_PASSWORD) {
+                closePasswordModal();
+                document.getElementById('threshold-editor').style.display = 'block';
+                renderThresholdEditor();
+            } else {
+                error.textContent = '密碼錯誤，無法開啟教師設定。';
+                input.select();
+            }
+        }
+
+        function closeTeacherSettings() {
+            document.getElementById('threshold-editor').style.display = 'none';
+        }
+
+        function renderThresholdEditor(){
+            const subjects={chinese:'國文',math:'數學',english:'英語',social:'社會',science:'自然'};
+            const grades=['A++','A+','A','B++','B+','B','C']; const box=document.getElementById('threshold-editor-content'); box.innerHTML='';
+            Object.entries(subjects).forEach(([key,name])=>{
+                const card=document.createElement('div'); card.className='threshold-card';
+                card.innerHTML=`<h3>${name}</h3><div class="threshold-grid"></div>`; const grid=card.querySelector('.threshold-grid');
+                grades.forEach((g,i)=>{ const label=document.createElement('label'); label.innerHTML=`<span>${g} 最低分</span><input type="number" step="0.01" value="${thresholds[key][i].min}" data-s="${key}" data-i="${i}">`; grid.appendChild(label); });
+                box.appendChild(card);
+            });
+            box.querySelectorAll('input').forEach(inp=>inp.addEventListener('change',()=>{ const s=inp.dataset.s,i=+inp.dataset.i; thresholds[s][i].min=+inp.value; thresholds[s].sort((a,b)=>b.min-a.min); saveThresholds();
+        calculate(); }));
+        }
+        function resetThresholds(){ thresholds=JSON.parse(JSON.stringify(defaultThresholds)); saveThresholds(); renderThresholdEditor(); calculate(); }
+
+        
         // 四捨五入到小數點後兩位
         function round2(num) {
             return Math.round(num * 100) / 100;
