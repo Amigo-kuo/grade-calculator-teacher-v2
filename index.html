@@ -174,7 +174,7 @@
             box.querySelectorAll('input').forEach(inp=>inp.addEventListener('change',()=>{ const s=inp.dataset.s,i=+inp.dataset.i; thresholds[s][i].min=+inp.value; thresholds[s].sort((a,b)=>b.min-a.min); saveThresholds(); renderThresholdEditor(); calculate(); }));
         }
         function resetThresholds(){ thresholds=JSON.parse(JSON.stringify(defaultThresholds)); saveThresholds(); renderThresholdEditor(); calculate(); }
- // 教師設定密碼：預設密碼為 114teacher，可自行修改
+ // 教師設定密碼：預設密碼為 115teacher，可自行修改
         const TEACHER_PASSWORD = '114teacher';
 
         function openTeacherSettings() {
