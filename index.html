@@ -163,7 +163,27 @@
         </table>
         <details class="settings"><summary>⚙️ 教師設定：修改各科等級範圍</summary><p class="settings-note">直接修改各級「最低分數」。設定會自動儲存在此瀏覽器。</p><div id="threshold-editor"></div><button class="reset-btn" onclick="resetThresholds()">恢復原始設定</button></details>
     </div>
-
+ <div class="settings">
+            <button class="reset-btn" type="button" onclick="openTeacherSettings()">🔒 教師設定：修改各科等級範圍</button>
+            <span class="teacher-lock">僅教師可修改</span>
+            <div id="threshold-editor" style="display:none;">
+                <p class="settings-note">修改各級「最低分數」即可。設定會自動儲存在此瀏覽器。</p>
+                <div id="threshold-editor-content"></div>
+                <button class="reset-btn" type="button" onclick="resetThresholds()">恢復原始設定</button>
+                <button class="reset-btn" type="button" onclick="closeTeacherSettings()">🔒 鎖定設定</button>
+            </div>
+        </div>
+        <div id="password-modal" class="password-modal" role="dialog" aria-modal="true">
+            <div class="password-box">
+                <h3>🔒 教師設定</h3>
+                <p>請輸入教師密碼後才能修改等級範圍。</p>
+                <input id="teacher-password" type="password" autocomplete="current-password" placeholder="請輸入密碼">
+                <div id="password-error" class="password-error"></div>
+                <div class="password-actions">
+                    <button class="password-cancel" type="button" onclick="closePasswordModal()">取消</button>
+                    <button class="password-ok" type="button" onclick="verifyTeacherPassword()">確認</button>
+                </div>
+            </div>
     <script>
         // 後台等級對照矩陣 (由大到小排列)
         const defaultThresholds = {
