@@ -78,6 +78,19 @@
         }
 
         .settings{margin-top:18px;border:1px solid #d8e0e8;border-radius:12px;padding:18px;background:#f8fafc}.settings summary{cursor:pointer;font-weight:700;color:#2c3e50;font-size:17px}.settings-note{color:#64748b;font-size:14px}.threshold-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px;margin-top:12px}.threshold-card h3{margin:0 0 10px}.threshold-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.threshold-grid label{display:flex;flex-direction:column;gap:4px;text-align:center;font-size:12px;color:#475569;font-weight:600}.threshold-grid input{width:100%;box-sizing:border-box;padding:7px 4px;text-align:center;border:1px solid #cbd5e1;border-radius:6px}.reset-btn{margin-top:14px;padding:9px 14px;border:0;border-radius:7px;background:#64748b;color:#fff;cursor:pointer}@media(max-width:600px){.threshold-grid{grid-template-columns:repeat(4,1fr)}}
+    
+        .password-modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:9999;align-items:center;justify-content:center;padding:20px}
+        .password-modal.show{display:flex}
+        .password-box{width:min(380px,100%);background:#fff;border-radius:14px;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+        .password-box h3{margin-top:0}
+        .password-box input{width:100%;box-sizing:border-box;padding:11px;border:1px solid #cbd5e1;border-radius:8px;margin:8px 0;font-size:16px}
+        .password-actions{display:flex;gap:8px;margin-top:10px}
+        .password-actions button{flex:1;padding:10px;border:0;border-radius:8px;cursor:pointer}
+        .password-ok{background:#4F81BD;color:#fff}
+        .password-cancel{background:#e2e8f0;color:#334155}
+        .password-error{color:#c00000;min-height:20px;font-size:13px}
+        .teacher-lock{font-size:12px;color:#64748b;margin-left:8px}
+    
     </style>
 </head>
 <body>
@@ -175,7 +188,7 @@
         }
         function resetThresholds(){ thresholds=JSON.parse(JSON.stringify(defaultThresholds)); saveThresholds(); renderThresholdEditor(); calculate(); }
  // 教師設定密碼：預設密碼為 115teacher，可自行修改
-        const TEACHER_PASSWORD = '114teacher';
+        const TEACHER_PASSWORD = '115teacher';
 
         function openTeacherSettings() {
             document.getElementById('password-modal').classList.add('show');
